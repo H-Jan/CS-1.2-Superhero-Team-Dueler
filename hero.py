@@ -3,6 +3,7 @@ import random
 from random import choice 
 from ability import Ability
 from armor import Armor
+from weapon import Weapon
 
 class Hero:
     def __init__(self, name, starting_health=100):
@@ -11,6 +12,8 @@ class Hero:
         self.name = name
         self.starting_health = starting_health
         self.current_health = starting_health
+        self.deaths = 0
+        self.kills = 0
 
     def fight(self, opponent):
         players = [self, opponent]
@@ -59,6 +62,16 @@ class Hero:
         else:
             print("Your Hero is alive for now")
             return True
+    
+    def add_weapon(self, weapon):
+        self.abilities.append(weapon)
+
+    def add_kill(self, num_kills):
+        '''Update self.kills by num_kills amount'''
+        self.kills += num_kills
+
+    def add_death(self, num_deaths):
+        self.deaths += num_deaths
 
     def fight(self, opponent):
         '''Current Hero will take turns fighting the opponent hero passed in'''
@@ -76,60 +89,73 @@ class Hero:
         
             if opponent.is_alive() is False:
                 print(f"{self.name} has won! ")
+                opponent.add_death(1)
                 return self.name
         
             if self.is_alive() is False:
                 print(f"{opponent.name} has won! ")
+                self.add_death(1)
                 return opponent.name
             return
+
     
 
-if __name__ == "__main__":
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero("Dumbledore")
-    ability1 = Ability("Super Speed", 300)
-    ability2 = Ability("Super Eyes", 130)
-    ability3 = Ability("Wizard Wand", 80)
-    ability4 = Ability("Wizard Beard", 20)
-    hero1.add_ability(ability1)
-    hero1.add_ability(ability2)
-    hero2.add_ability(ability3)
-    hero2.add_ability(ability4)
-    hero1.fight(hero2)
+
+# if __name__ == "__main__":
+#     # If you run this file from the terminal
+#     # this block is executed.
+#     hero = Hero("Wonder Woman")
+#     weapon = Weapon("Lasso of Truth", 90)
+#     hero.add_weapon(weapon)
+#     print(weapon)
+#     print(hero.attack())
+
+# if __name__ == "__main__":
+#     #hero1 = Hero("Wonder Woman")
+#     #hero2 = Hero("Dumbledore")
+#     #ability1 = Ability("Super Speed", 300)
+#     #ability2 = Ability("Super Eyes", 130)
+#     #ability3 = Ability("Wizard Wand", 80)
+#     #ability4 = Ability("Wizard Beard", 20)
+#     #hero1.add_ability(ability1)
+#     #hero1.add_ability(ability2)
+#     #hero2.add_ability(ability3)
+#     #hero2.add_ability(ability4)
+#     #hero1.fight(hero2)
 
 
-if __name__=="__main__": 
-    hero = Hero("Grace Hopper", 200)
-    hero.take_damage(150)
-    print(hero.is_alive())
-    hero.take_damage(150000)
-    print(hero.is_alive())
+# #if __name__=="__main__": 
+#     #hero = Hero("Grace Hopper", 200)
+#     #hero.take_damage(150)
+#     #print(hero.is_alive())
+#     #hero.take_damage(150000)
+#     #print(hero.is_alive())
 
 
-if __name__=="__main__":
-    hero = Hero("GRace Hopper", 200)
-    shield = Armor("Shield", 50)
-    hero.add_armor(shield)
-    hero.take_damage(50)
-    print(hero.current_health)
+# #if __name__=="__main__":
+#     #hero = Hero("GRace Hopper", 200)
+#     #shield = Armor("Shield", 50)
+#     hero.add_armor(shield)
+#     hero.take_damage(50)
+#     print(hero.current_health)
 
-if __name__=='__main__':
-    ability = Ability("Great Debugging", 50)
-    another_ability = Ability("Smarty Pants", 90)
-    hero = Hero("Grace Hopper", 200)
-    hero.add_ability(ability)
-    hero.add_ability(another_ability)
-    print(hero.attack())
-    print(hero.abilities)
+# if __name__=='__main__':
+#     ability = Ability("Great Debugging", 50)
+#     another_ability = Ability("Smarty Pants", 90)
+#     hero = Hero("Grace Hopper", 200)
+#     hero.add_ability(ability)
+#     hero.add_ability(another_ability)
+#     print(hero.attack())
+#     print(hero.abilities)
 
-if __name__=="__main__":
-    my_hero = Hero("Grace Hopper", 200)
-    print(my_hero.name)
-    print(my_hero.current_health)
+# if __name__=="__main__":
+#     my_hero = Hero("Grace Hopper", 200)
+#     print(my_hero.name)
+#     print(my_hero.current_health)
 
-if __name__ == "__main__":
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero ("Dumbledore")
+# if __name__ == "__main__":
+#     hero1 = Hero("Wonder Woman")
+#     hero2 = Hero ("Dumbledore")
 
-hero1.fight(hero2)
+# hero1.fight(hero2)
 
