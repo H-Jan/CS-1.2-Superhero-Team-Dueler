@@ -62,7 +62,40 @@ class Hero:
 
     def fight(self, opponent):
         '''Current Hero will take turns fighting the opponent hero passed in'''
+        # 0) Check if at least one hero has abilities. If no hero has abilities, print "Draw"
+        # 1) else, start the fighting loop until a hero has won
+        # 2) the hero (self) and their opponent must attack each other
+        # and each must take damage from the other's attack
+        # 3) AFter each attack, check if either the hero (self) or the opponent is alive
+        # 4) if one of them has died, print "HeroName won!" replacing HeroName 
+        # with the name of the hero, and end the fight loop
+        while opponent.is_alive() is True and self.is_alive() is True:
+            self.take_damage(opponent.attack())
+            opponent.take_damage(self.attack())
+            #The above code takes care of 0, 1, and 2 conditions
         
+            if opponent.is_alive() is False:
+                print(f"{self.name} has won! ")
+                return self.name
+        
+            if self.is_alive() is False:
+                print(f"{opponent.name} has won! ")
+                return opponent.name
+            return
+    
+
+if __name__ == "__main__":
+    hero1 = Hero("Wonder Woman")
+    hero2 = Hero("Dumbledore")
+    ability1 = Ability("Super Speed", 300)
+    ability2 = Ability("Super Eyes", 130)
+    ability3 = Ability("Wizard Wand", 80)
+    ability4 = Ability("Wizard Beard", 20)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+    hero1.fight(hero2)
 
 
 if __name__=="__main__": 
